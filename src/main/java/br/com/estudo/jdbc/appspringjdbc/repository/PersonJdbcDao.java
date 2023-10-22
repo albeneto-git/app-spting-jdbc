@@ -20,4 +20,15 @@ public class PersonJdbcDao {
 		return jdbcTemplate.query("select * from person", 
 					new BeanPropertyRowMapper<Person>(Person.class)); // usa um parseador para traduzir do modelo relacional para o objeto de negócio.
 	}
+	
+	public Person findById(final int id){
+		// faz a chamada ao bando de dados por id
+		return jdbcTemplate.queryForObject("select * from person where id = ?", new Object[]{id},
+					new BeanPropertyRowMapper<Person>(Person.class)); // usa um parseador para traduzir do modelo relacional para o objeto de negócio.
+	}
+	
+	public int deleteById(final int id){
+		// faz a chamada ao bando de dados por id
+		return jdbcTemplate.update("delete from person where id = ?", new Object[]{id}); // usa um parseador para traduzir do modelo relacional para o objeto de negócio.
+	}
 }
